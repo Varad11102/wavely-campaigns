@@ -1,0 +1,17 @@
+{
+  "name": "Wavely Campaigns",
+  "short_name": "Wavely",
+  "description": "Consent-first WhatsApp campaign workspace powered by MudBot.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#eaf7f0",
+  "theme_color": "#128c7e",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
