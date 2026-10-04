@@ -90,15 +90,74 @@ You only install Node.js once. If someone already installed it, skip this sectio
 
 ## 1. Configure MudBot
 
-1. Open <https://watobot.xyz>.
-2. Register/sign in through MudBot's email magic-link flow.
-3. Open its dashboard and select **Connect WhatsApp**.
-4. On the phone, open WhatsApp/WhatsApp Business and go to **Settings/Menu → Linked devices → Link a device**.
-5. Scan MudBot's QR code and wait until it reports that WhatsApp is connected. Its documentation notes this can require several attempts.
-6. Open MudBot's API-key section and generate a key.
-7. Copy it immediately and keep it private.
+MudBot is the bridge between Wavely and WhatsApp. Complete this part before running Wavely. Keep both the computer and phone connected to the internet.
 
-Generated keys are documented as one-hour test keys. Only the MudBot server owner can mark one permanent; Wavely cannot extend it.
+### Part A: Sign in to MudBot
+
+1. On the computer, open Chrome or Edge.
+2. Go to <https://watobot.xyz>.
+3. Select **Try Now**.
+4. Type an email address that you can open.
+5. Ask MudBot to send the sign-in email.
+6. Open the email inbox in a new browser tab.
+7. Look for the email from MudBot/Watobot. Also check **Spam** or **Junk** if it is missing.
+8. Open that email and select its sign-in link. This is called a **magic link**; it replaces a password.
+9. The MudBot dashboard should open. Keep this browser tab open.
+
+Use the same browser for the magic link and dashboard. MudBot says its login token is kept in that browser. Registering the same email again creates a new token and can make the old login stop working.
+
+### Part B: Connect the WhatsApp phone
+
+1. In the MudBot dashboard, select **Connect WhatsApp**.
+2. Wait approximately 15–20 seconds. A square black-and-white QR code should appear.
+3. Pick up the phone containing the WhatsApp account that will send messages.
+4. Open **WhatsApp** or **WhatsApp Business** on that phone.
+5. On Android, select the three-dot menu at the top-right, then **Linked devices**. On iPhone, select **Settings** at the bottom-right, then **Linked Devices**.
+6. Select **Link a device**.
+7. The phone may ask for a fingerprint, face scan, or phone passcode. Complete that normal security check.
+8. The phone camera opens. Point it at the entire QR code shown on the computer.
+9. Hold the phone still until WhatsApp accepts the code.
+10. On the phone, wait until a new linked device—often named **Google Chrome**—appears.
+11. Return to the MudBot page on the computer and select **Continue** if that button appears.
+12. Wait until MudBot reports that WhatsApp is connected.
+
+Do not photograph or send the QR code to another person. It can grant access to the WhatsApp account. If the code expires, request a new code and scan the new one. MudBot's documentation warns that connecting can require several attempts.
+
+### Part C: Create the API key
+
+An API key is a private password that allows Wavely to ask MudBot to send a message.
+
+1. Stay on the MudBot dashboard after WhatsApp is connected.
+2. Find the section named **API key** or **Generate API key**.
+3. Select **Generate**.
+4. Wait for the long key to appear.
+5. Select **Copy**, or carefully highlight the entire key and press **Ctrl+C**.
+6. Do not paste the key into WhatsApp, a CSV file, a screenshot, GitHub, or a message to another person.
+7. Return to the extracted Wavely folder and run the easy setup command from section 0.
+8. When setup asks for the MudBot API key, paste it by right-clicking in PowerShell, then press **Enter**. The key stays invisible while being pasted.
+
+MudBot documents generated API keys as one-hour testing keys. Wavely cannot make a key permanent. Only the owner of the MudBot server can mark one permanent. If a key expires, create a new one in MudBot, replace the `MUDBOT_API_KEY` value in Wavely's `.env` file, and restart Wavely.
+
+### Part D: Confirm everything works
+
+1. Keep the linked phone switched on and connected to the internet.
+2. Start Wavely with the one-command setup.
+3. Import a CSV whose first contact is your own test phone or another person who agreed to receive the test.
+4. Write a harmless message such as `Hello, this is a test.`
+5. Select **Send one test** in Wavely.
+6. Wait at least 20 seconds before deciding that it failed; MudBot documents a normal 15–20 second delay.
+7. Check the receiving phone. Start a campaign only after this single test succeeds.
+
+### If the connection stops working
+
+- If Wavely says the key is invalid or expired, generate a new MudBot API key and update `.env`.
+- If MudBot says WhatsApp is disconnected, repeat Part B and scan a fresh QR code.
+- If the QR code will not scan, increase the computer screen brightness, clean the phone camera, fit the whole code inside the camera box, or generate a fresh code.
+- If the email does not arrive, check Spam/Junk, verify the address, wait a few minutes, and request another magic link.
+- If WhatsApp shows an unfamiliar linked device, remove it immediately from **Linked devices**.
+- According to MudBot's documentation, logging out disconnects WhatsApp and removes its encrypted authentication data. Do not log out merely to close the browser tab.
+
+MudBot is unofficial software. It can stop working when WhatsApp changes, and using automation can lead to account restrictions or a ban. Use only opted-in contacts and stop immediately when someone opts out.
 
 MudBot's hosted backend is:
 
