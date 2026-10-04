@@ -21,14 +21,12 @@ An **API key** is a private password that lets Wavely speak to your MudBot accou
 
 Do these jobs in this order:
 
-1. Install Node.js once.
-2. Connect MudBot to WhatsApp once.
-3. Get a MudBot API key.
-4. Put that key into Wavely's `.env` file.
-5. Start Wavely.
-6. Import a CSV list.
-7. Send one test message.
-8. Only after the test works, start the campaign.
+1. Connect MudBot to WhatsApp and get its API key.
+2. Download and extract Wavely.
+3. Run one setup command. It installs Node.js if needed and starts Wavely.
+4. Import a CSV list.
+5. Send one test message.
+6. Only after the test works, start the campaign.
 
 The detailed instructions below explain every step.
 
@@ -58,18 +56,35 @@ The detailed instructions below explain every step.
 - Internet access
 - A MudBot account, connected WhatsApp device, and valid API key
 
-## 0. Install Node.js (one time only)
+## 0. Easy setup: use one command
 
-Node.js is the free program that makes Wavely run.
+Node.js is the free engine that makes Wavely run. You do not need to install it by hand. The included helper can install it for you.
 
-1. Open <https://nodejs.org/> in your browser.
-2. Download the button marked **LTS**. LTS means the stable version.
-3. Open the downloaded installer.
-4. Select **Next** on each screen.
-5. Accept the license when asked.
-6. Leave the suggested options unchanged.
-7. Select **Install**, then **Finish**.
-8. Restart the computer if Windows asks you to.
+First complete the MudBot connection in section 1 and download Wavely as explained in section 2. Then:
+
+1. Open the extracted `wavely-campaigns` folder.
+2. Click the address box at the top of the folder window.
+3. Type `powershell` and press **Enter**. A blue or black window opens.
+4. Copy the entire command below, paste it into that window, and press **Enter**:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\setup-and-start.ps1
+```
+
+5. If Windows asks for permission to install Node.js, select **Yes**.
+6. When asked for the MudBot API key, paste it and press **Enter**. Nothing appears while it is pasted; that is intentional so nearby people cannot read the private key.
+7. Wait. The browser opens Wavely automatically.
+8. Keep the PowerShell window open while using Wavely. Press **Ctrl+C** in that window when completely finished.
+
+The helper does these jobs automatically:
+
+- Checks whether Node.js is already installed.
+- Installs the current free Node.js LTS release through Windows Package Manager when necessary.
+- Saves the MudBot key in the private `.env` file only when that file does not already exist.
+- Keeps an existing `.env` file unchanged.
+- Opens `http://127.0.0.1:3000` and starts Wavely.
+
+If it says that Windows must restart, restart the computer, return to the extracted folder, and run the same command again. Node.js only needs to be installed once.
 
 You only install Node.js once. If someone already installed it, skip this section.
 
@@ -117,7 +132,7 @@ git clone <repository-url>
 cd wavely-campaigns
 ```
 
-Now create the private settings file:
+The one-command setup creates the private settings file automatically. The manual instructions below are only needed if the automatic helper cannot be used:
 
 1. Open the extracted Wavely folder.
 2. Find `.env.example`. If Windows hides file endings, open File Explorer's **View** menu and enable **File name extensions**.
@@ -140,9 +155,15 @@ PORT=3000
 
 Never put a key in `app.js`, a CSV, screenshots, support messages, or commits. Every user must use their own MudBot account, linked WhatsApp device, and API key.
 
-## 3. Start Wavely
+## 3. Start Wavely on later days
 
-Start it as follows:
+The simplest method is to repeat the same command whenever you want to use Wavely:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\setup-and-start.ps1
+```
+
+It will see that Node.js and `.env` already exist, keep them unchanged, and start the program. Alternatively, start it manually as follows:
 
 1. Open the extracted Wavely folder in File Explorer.
 2. Click once inside the address bar at the top of File Explorer. This is the box showing the folder location.
